@@ -26,7 +26,7 @@ public class FragmentStack {
         elements =  new Fragment[size]; // create array
     }
     public static FragmentStack getInstance(Context mCntext){
-        final int DEFAULT_STACK_SIZE=20;
+        final int DEFAULT_STACK_SIZE=100;
         mContext=mCntext;
         if(fragmentStackObj==null) {
             fragmentStackObj = new FragmentStack(DEFAULT_STACK_SIZE);
@@ -41,6 +41,7 @@ public class FragmentStack {
         return (top == size - 1);
     }
     public  void pushFragment(AppCompatActivity context, Fragment fragment) {
+
 
         elements[++top] = fragment; // place pushValue on FragmentStack
         FragmentTransaction fragmentTransaction = context.getSupportFragmentManager().beginTransaction();

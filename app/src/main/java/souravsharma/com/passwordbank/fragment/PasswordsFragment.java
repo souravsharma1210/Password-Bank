@@ -52,9 +52,7 @@ public class PasswordsFragment extends Fragment {
         if(!(cursor==null ||cursor.getCount()==0)) {
             Log.d(DEBUG_TAG,"Cursor");
             setUpAdapter(cursor);
-            ItemTouchHelper.Callback callback = new ItemTouchHelperCallback((onMoveAndSwipedListener) passwordAdapter);
-            ItemTouchHelper mItemTouchHelper = new ItemTouchHelper(callback);
-            mItemTouchHelper.attachToRecyclerView(recyclerView);
+
         }
         else
         {

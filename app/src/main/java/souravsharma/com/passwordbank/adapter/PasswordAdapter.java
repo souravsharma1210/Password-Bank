@@ -13,17 +13,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Collections;
+
 import souravsharma.com.passwordbank.R;
 import souravsharma.com.passwordbank.bean.Password;
 import souravsharma.com.passwordbank.fragment.PasswordDetailFragment;
 import souravsharma.com.passwordbank.util.FragmentStack;
+import souravsharma.com.passwordbank.util.onMoveAndSwipedListener;
 
 
 /**
  * Created by sourav sharma on 01-07-2017.
  */
 
-public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Holder> {
+public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.Holder>{
     private static final String DEBUG_TAG =PasswordAdapter.class.getSimpleName() ;
     private Context mContext;
     private Cursor cursor;
