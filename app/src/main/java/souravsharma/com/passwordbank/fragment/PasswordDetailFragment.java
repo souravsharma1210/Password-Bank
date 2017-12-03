@@ -95,25 +95,25 @@ public class PasswordDetailFragment extends Fragment {
         contentValues.put(PasswordContract.PasswordEntry.COLUMN_URL,url.getText().toString());
         contentValues.put(PasswordContract.PasswordEntry.COLUMN_NOTES,notes.getText().toString());
         //Uri uri=contentResolver.insert(CONTENT_URI,contentValues);
-        int id=mContext.getContentResolver().delete(CONTENT_URI.buildUpon().appendPath(passwordName.getText().toString()).build(),null,null);
-        Uri uri=contentResolver.insert(CONTENT_URI,contentValues);
-        if(uri!=null)
-        {
-            FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
+        int id=mContext.getContentResolver().update(CONTENT_URI.buildUpon().appendPath(passwordName.getText().toString()).build(),contentValues,null,null);
+
+        if(id>0)
+        {mContext.onBackPressed();
+         //   FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
             Toast.makeText(mContext, "Updated successfully", Toast.LENGTH_SHORT).show();
         }
         else
         {
             Toast.makeText(mContext,"Cannot update",Toast.LENGTH_SHORT).show();
         }
-        FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
+
     }
     private void delete()
     {
         int id=mContext.getContentResolver().delete(CONTENT_URI.buildUpon().appendPath(passwordName.getText().toString()).build(),null,null);
         if(id>0)
-        {
-            FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
+        {    mContext.onBackPressed();
+            //FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
         }
     }
     private boolean isValidInput(){

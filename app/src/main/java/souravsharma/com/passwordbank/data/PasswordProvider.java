@@ -12,6 +12,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import static souravsharma.com.passwordbank.data.PasswordContract.PasswordEntry.TABLE_NAME;
+
 /**
  * Created by sourav sharma on 01-07-2017.
  */
@@ -50,7 +52,7 @@ public class PasswordProvider extends ContentProvider {
 
             case CODE_PASSWORD:
                 cursor = mOpenHelper.getReadableDatabase().query(
-                        PasswordContract.PasswordEntry.TABLE_NAME,
+                        TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -86,7 +88,7 @@ public class PasswordProvider extends ContentProvider {
                 db.beginTransaction();
                 long _id;
                 try {
-                    _id = db.insert(PasswordContract.PasswordEntry.TABLE_NAME, null, contentValues);
+                    _id = db.insert(TABLE_NAME, null, contentValues);
                     db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
@@ -114,7 +116,7 @@ public class PasswordProvider extends ContentProvider {
             case CODE_PASSWORD_WITH_ID:
                 String id1 = uri.getPathSegments().get(1);
                 id = mOpenHelper.getWritableDatabase().delete(
-                       PasswordContract.PasswordEntry.TABLE_NAME,
+                       TABLE_NAME,
                         PasswordContract.PasswordEntry.COLUMN_PASSWORD_NAME+"=?",new String[]{id1});
                 break;
             default:
@@ -131,7 +133,29 @@ public class PasswordProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        int tasksUpdated;
+
+        // match code
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case CODE_PASSWORD_WITH_ID:
+                //update a single task by getting the id
+                String id = uri.getPathSegments().get(1);
+                //using selections
+                tasksUpdated = mOpenHelper.getWritableDatabase().update(TABLE_NAME, contentValues, PasswordContract.PasswordEntry.COLUMN_PASSWORD_NAME+"=?", new String[]{id});
+                break;
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
+
+        if (tasksUpdated != 0) {
+            //set notifications if a task was updated
+            getContext().getContentResolver().notifyChange(uri, null);
+        }
+
+        // return number of tasks updated
+        return tasksUpdated;
     }
     @Override
     @TargetApi(11)

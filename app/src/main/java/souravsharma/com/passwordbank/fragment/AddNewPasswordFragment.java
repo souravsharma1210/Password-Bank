@@ -98,7 +98,8 @@ public class AddNewPasswordFragment extends android.support.v4.app.Fragment {
         Uri uri=contentResolver.insert(CONTENT_URI,contentValues);
         if(uri!=null)
         {
-            FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
+            mContext.onBackPressed();
+            //FragmentStack.getInstance(mContext).pushFragment(mContext,new PasswordsFragment());
             Toast.makeText(mContext, "Inserted successfully", Toast.LENGTH_SHORT).show();
         }
         else
