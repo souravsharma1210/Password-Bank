@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         if(FragmentStack.getInstance(MainActivity.this).size()==1)
         {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setTitle("You want to move out");
+            alertDialog.setTitle("Log out");
             alertDialog.setMessage("Are you sure you want to Logout?");
             //alertDialog.setIcon(R.drawable.ic_signout);
             alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
