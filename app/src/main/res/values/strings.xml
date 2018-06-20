@@ -1,15 +1,17 @@
 <resources>
     <string name="app_name">Password Bank</string>
-
+    <string name="version_name">1.0</string>
+    <string name="version_code">1.0</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="create_message">Create Master Password</string>
     <string name="enter_password">Enter Master Password</string>
     <string name="confirm_password">Confirm Master Password</string>
+    <string name="credits"><u>GITHUB</u></string>
     <string name="Confirm">Confirm Password</string>
     <string name="set_password">Set Password</string>
     <string name="successfull_login">SuccessFull Login</string>
-    <string name="unsuccessfull_login">Login Failed</string>
+    <string name="unsuccessfull_login">Wrong Password</string>
     <string name="successfull_SignUp">SuccessFull signUp</string>
     <string name="unsuccessfull_signUp">SignUp Failed</string>
     <string name="no_password_saved">No Password Saved</string>
